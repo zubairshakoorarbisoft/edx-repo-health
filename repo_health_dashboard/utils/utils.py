@@ -3,7 +3,9 @@ utils used to create dashboard
 """
 import csv
 import html
+import json
 import os
+import sqlite3
 
 
 def squash_dict(input_dict, delimiter="."):
@@ -184,3 +186,52 @@ def write_squashed_metadata_to_html(metadata_by_repo=None, filename="dashboard.h
         f.write("</tbody>\n")
         f.write("</table>\n")
         f.write("</body></html>\n")
+
+def write_squashed_metadata_to_sqlite(metadata_by_repo, table_name, configuration, sqlite_output):
+    """
+    Assume all the metadata_by_repo have the same keys
+    """
+    # Get a superset of all keys in the metadata_by_repo dictionaries
+    superset_keys = get_superset_of_keys(metadata_by_repo)
+
+    # Discard keys that are not in the configuration check order
+    for key in configuration["check_order"]:
+        superset_keys.discard(key)
+
+    # Determine the sorted keys to use based on the configuration
+    if configuration.get("subset", False):
+        sorted_keys = configuration["check_order"]
+    else:
+        sorted_keys = configuration["check_order"] + list(sorted(superset_keys))
+
+    # Change key names to their aliases for display
+    sorted_aliased_keys = []
+    for key in sorted_keys:
+        if key in configuration["key_aliases"]:
+            sorted_aliased_keys.append(configuration["key_aliases"][key])
+        else:
+            sorted_aliased_keys.append(key)
+
+    # Connect to the SQLite database file
+    conn = sqlite3.connect(sqlite_output+".db")
+    c = conn.cursor()
+
+    # Create a table for the metadata if it does not already exist
+    # Strip filename which contains the path and get last token for table name
+    table_columns = ["repo_name"] + sorted_aliased_keys
+    
+    # Replace '.', '-', ':' with _ in the column names
+    table_columns = [column.replace('.', '_').replace('-', '_').replace(':', '_') for column in table_columns]
+    columns = ', '.join([key + ' text' for key in table_columns])
+    query = 'CREATE TABLE IF NOT EXISTS {} ({})'.format(table_name, columns)
+    c.execute(query)
+    # Iterate through the metadata by repository
+    for repo_name, item in metadata_by_repo.items():
+        # Insert the repository name and metadata string into the table
+                
+        c.execute(f'''INSERT INTO {table_name} VALUES (?, {', '.join(['?' for key in sorted_keys])})''',
+              [repo_name] + [str(item[k]) if k in item else None for k in sorted_keys])
+
+    # Save the changes to the database and close the connection
+    conn.commit()
+    conn.close()
