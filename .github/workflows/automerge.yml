@@ -17,3 +17,4 @@ jobs:
           MERGE_REQUIRED_APPROVALS: "0"
           MERGE_COMMIT_MESSAGE: pull-request-title
           MERGE_METHOD: "rebase"
+
