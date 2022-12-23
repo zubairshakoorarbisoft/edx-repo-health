@@ -1,12 +1,10 @@
-name: Auto Merge
 
+name: automerge
 on:
   check_suite:
-    conclusion:
-      - success
-  # check_suite:
-  #   types:
-  #     - completed
+    types:
+      - completed
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
