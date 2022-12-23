@@ -2,9 +2,12 @@
 name: Auto Merge
 
 on:
+  pull_request:
+    branches: 
+    - master
   push:
     branches:
-      - 'zshkoor/automerge'
+      - 'zshkoor/automerge'  
 
 jobs:
   automerge:
