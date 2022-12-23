@@ -16,3 +16,4 @@ jobs:
           MERGE_RETRY_SLEEP: "5000"
           MERGE_REQUIRED_APPROVALS: "0"
           MERGE_COMMIT_MESSAGE: pull-request-title
+
