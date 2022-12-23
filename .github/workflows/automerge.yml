@@ -2,11 +2,8 @@ name: Auto Merge
 
 on:
   check_suite:
-    conclusion:
-      - success
-  # check_suite:
-  #   types:
-  #     - completed
+    types:
+      - completed
 
 jobs:
   automerge:
