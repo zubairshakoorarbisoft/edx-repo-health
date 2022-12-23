@@ -2,8 +2,8 @@
 name: Auto Merge
 
 on:
-  check_suite:
-    types: completed
+  check_run:
+    types: [completed]
 
 jobs:
   automerge:
