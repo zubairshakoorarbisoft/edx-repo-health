@@ -2,9 +2,8 @@
 name: Auto Merge
 
 on:
-  pull_request:
-    branches: 
-    - master
+  check_suite:
+    types: [completed]
 
 jobs:
   automerge:
