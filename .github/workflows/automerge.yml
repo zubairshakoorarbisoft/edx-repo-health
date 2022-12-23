@@ -2,10 +2,8 @@
 name: Auto Merge
 
 on:
-  workflow_run:
-    workflows: []
-    types:
-      - completed
+  check_suite:
+    action: completed
 
 jobs:
   automerge:
