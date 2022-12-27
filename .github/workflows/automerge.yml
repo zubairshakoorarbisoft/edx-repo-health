@@ -2,10 +2,9 @@
 name: Auto Merge
 
 on:
-  check_suite:
+  pull_request:
     types:
-      - completed
-  status: {}
+      - opened
 
 jobs:
   automerge:
@@ -15,8 +14,8 @@ jobs:
         uses: "pascalgn/automerge-action@v0.14.3"
         env:
           GITHUB_TOKEN: "${{ secrets.ZUBAIRGITHUBTOKEN }}"
-          MERGE_LABELS: ""
-          MERGE_RETRIES: "10"
-          MERGE_RETRY_SLEEP: "5000"
+          MERGE_LABELS: "Ready to Merge"
+          MERGE_RETRIES: "3"
+          MERGE_RETRY_SLEEP: "600000"
           MERGE_REQUIRED_APPROVALS: "0"
           MERGE_COMMIT_MESSAGE: pull-request-title
