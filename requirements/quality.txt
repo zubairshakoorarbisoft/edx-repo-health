@@ -79,7 +79,7 @@ gitdb==4.0.10
     #   gitpython
 github.py @ git+https://github.com/ShineyDev/github.py.git@8e3514010eb35a91e012f2935f48138b3c35cef6
     # via -r requirements/test.txt
-gitpython==3.1.29
+gitpython==3.1.30
     # via
     #   -r requirements/test.txt
     #   pytest-repo-health
@@ -130,7 +130,7 @@ packaging==22.0
     #   pytest
 pbr==5.11.0
     # via stevedore
-platformdirs==2.6.0
+platformdirs==2.6.2
     # via pylint
 pluggy==1.0.0
     # via
