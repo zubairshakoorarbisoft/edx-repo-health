@@ -41,7 +41,7 @@ charset-normalizer==2.1.1
     #   -r requirements/test.txt
     #   aiohttp
     #   requests
-coverage[toml]==7.0.1
+coverage[toml]==7.0.3
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -72,7 +72,7 @@ gitdb==4.0.10
     #   gitpython
 github.py @ git+https://github.com/ShineyDev/github.py.git@8e3514010eb35a91e012f2935f48138b3c35cef6
     # via -r requirements/test.txt
-gitpython==3.1.29
+gitpython==3.1.30
     # via
     #   -r requirements/test.txt
     #   pytest-repo-health
@@ -94,7 +94,7 @@ idna==3.4
     #   yarl
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.2.0
+importlib-metadata==6.0.0
     # via sphinx
 iniconfig==1.1.1
     # via
@@ -133,7 +133,7 @@ pyasn1-modules==0.2.8
     # via
     #   -r requirements/test.txt
     #   google-auth
-pygments==2.13.0
+pygments==2.14.0
     # via
     #   doc8
     #   readme-renderer
@@ -195,7 +195,7 @@ smmap==5.0.0
     #   gitdb
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==5.3.0
+sphinx==6.1.1
     # via
     #   -r requirements/doc.in
     #   edx-sphinx-theme
